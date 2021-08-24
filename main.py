@@ -13,28 +13,7 @@ class PESData:
     def __init__(self, distFile, energyFile):
         self.distFile = distFile
         self.energyFile = energyFile
-
-    def removeOutLier(self):
-        print("Total data: %d" % len(self.energies))
-        mean = np.mean(self.energies)
-        std = np.std(self.energies)
-
-        low = mean - std
-        high = mean + std
-
-        temp_enr = []
-        temp_distance = []
-
-        for i in range(len(self.energies)):
-
-            if self.energies[i] < high and self.energies[i] > low:
-                temp_enr.append(self.energies[i])
-                temp_distance.append(self.distances[i, :])
-
-        self.energies = np.array(temp_enr)
-        self.distances = np.array(temp_distance)
-        print("Total data: %d" % len(self.energies))
-
+        
     def read(self):
         self.distances = np.genfromtxt(self.distFile)
         self.energies = np.genfromtxt(self.energyFile)
